@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title>Welcome to Firebase Hosting</title>
+ <style type="text/css">
+  body {
+    width: 100%;
+    background-color: rgb(70, 90, 83);
+    display: flex;
+    flex-direction: column;
+  }
+  .container {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  .title {
+    color: #ffffff;
+    font-size: 2rem;
+    padding: 20px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .box_01 {
+    background-color: rgb(130, 165, 153);
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    padding: 12px;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+  .box_02 {
+    background-color: rgb(130, 165, 153);
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    padding: 12px;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+  .box_03 {
+    background-color: rgb(130, 165, 153);
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    padding: 12px;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+  #write {
+    background-color: rgb(130, 165, 153);
+    padding: 12px;
+    width: 500px;
+    height: 200px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+  .bb {
+    color: rgb(107, 230, 230);
+  }
+ </style>
+  <!-- jquery 링크 -->
+<script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous">
+</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+<body>
+  <div class="title">Write</div>
+    <div class="container"></div>
+
+        <!-- update the version number as needed -->
+        <script defer src="/__/firebase/10.7.1/firebase-app-compat.js"></script>
+        <!-- include only the Firebase features as you need -->
+        <script defer src="/__/firebase/10.7.1/firebase-auth-compat.js"></script>
+        <script defer src="/__/firebase/10.7.1/firebase-database-compat.js"></script>
+        <script defer src="/__/firebase/10.7.1/firebase-firestore-compat.js"></script>
+        <script defer src="/__/firebase/10.7.1/firebase-storage-compat.js"></script>
+        <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCd1cZu82k1964rUiot_7JpmM4AyBTGE0o",
+          authDomain: "profile-jihee.firebaseapp.com",
+          projectId: "profile-jihee",
+          storageBucket: "profile-jihee.appspot.com",
+          messagingSenderId: "605574440543",
+          appId: "1:605574440543:web:0cd87ffce96b0814a4ddea"
+        };
+    
+        // Initialize Firebase
+        // const app = const app = initializeApp(firebaseConfig);
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig)
+    
+        // Firebase 데이터베이스(firestore) 연결
+        const db = firebase.firestore();
+    
+        // 데이터베이스에 있는 market 커넥션 연결한 뒤 forEach로 데이터 가져오기
+        db.collection('market').get().then((result) => { 
+            result.forEach((doc) => { 
+                console.log(doc.data()); 
+
+                var temp = `                  
+                    <div class="box_01">
+                      <div id="text">제목 :</div>
+                      <div class="bb">${ doc.data().title }</div>
+                    </div>
+
+                    <div class="box_02">
+                      <div id="text">글쓴이 :</div>
+                      <div class="bb">${ doc.data().name }</div>
+                    </div>
+
+                    <div class="box_03">
+                      <div id="text">작성일 :</div>
+                      <div class="bb">${ doc.data().data }</div>
+                    </div>
+
+                    <div class="box_04">
+                      <div id="write">${ doc.data().write }</div>
+                    </div>
+                `;
+                $('.container').append(temp)
+            }) 
+        }) 
+      </script>
+
+</body>
+</html>
